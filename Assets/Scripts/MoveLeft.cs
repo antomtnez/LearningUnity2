@@ -23,7 +23,7 @@ public class MoveLeft : MonoBehaviour
     //This destroy the obstacles when them arrives at left bound
     void DestroyAtTheLeftBound()
     {
-        if(transform.position.x < leftBound && gameObject.CompareTag("Obstacles"))
+        if(transform.position.x < leftBound && gameObject.CompareTag("Obstacle"))
             Destroy(gameObject);
     }
 }
