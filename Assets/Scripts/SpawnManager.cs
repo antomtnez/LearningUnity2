@@ -7,13 +7,17 @@ public class SpawnManager : MonoBehaviour
     private float startDelay = 2f;
     private float repeatRate = 2f;
 
+    private PlayerController playerController;
+
     void Start()
     {
         InvokeRepeating("SpawnObstacle", startDelay, repeatRate);
+        playerController = FindObjectOfType<PlayerController>();
     }
 
     void SpawnObstacle()
     {
-        Instantiate(obstaclePrefab, spawnPos, obstaclePrefab.transform.rotation);
+        if(playerController.gameOver == false)
+            Instantiate(obstaclePrefab, spawnPos, obstaclePrefab.transform.rotation);
     }
 }
