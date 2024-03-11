@@ -5,6 +5,8 @@ public class MoveLeft : MonoBehaviour
     private float speed = 10f;
     private PlayerController playerController;
 
+    private float leftBound = -15f;
+
     void Start()
     {
         playerController = FindObjectOfType<PlayerController>();  
@@ -13,6 +15,15 @@ public class MoveLeft : MonoBehaviour
     void Update()
     {
         if(playerController.gameOver == false)
-            transform.Translate(Vector3.left * Time.deltaTime * speed);    
+            transform.Translate(Vector3.left * Time.deltaTime * speed); 
+
+        DestroyAtTheLeftBound(); 
+    }
+
+    //This destroy the obstacles when them arrives at left bound
+    void DestroyAtTheLeftBound()
+    {
+        if(transform.position.x < leftBound && gameObject.CompareTag("Obstacles"))
+            Destroy(gameObject);
     }
 }
