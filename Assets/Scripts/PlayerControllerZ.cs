@@ -22,22 +22,34 @@ public class PlayerControllerZ : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
-        //Moves the player in X and Z axis
-        transform.Translate(new Vector3(horizontalInput, 0f, verticalInput) * speed * Time.deltaTime);
+        MovePlayer();
 
         if(Input.GetKeyDown(KeyCode.Space))
         {
             if(isOnGround)
             {
+                //Enter here for the first jump
                 Jump();
                 isOnGround = false;
             }
             else if(canDoubleJump)
             {
+                //Then enter here for double jump ability
                 Jump();
                 canDoubleJump = false;
             }
         }
+    }
+
+    void MovePlayer()
+    {
+        //Moves the player in X and Z axis
+        transform.Translate(new Vector3(horizontalInput, 0f, verticalInput) * speed * Time.deltaTime);
+    }
+    
+    void Jump()
+    {
+        _playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
 
     void OnCollisionEnter(Collision other) 
@@ -48,10 +60,4 @@ public class PlayerControllerZ : MonoBehaviour
             canDoubleJump = true;
         }
     }
-
-    void Jump()
-    {
-        _playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-    }
-
 }
