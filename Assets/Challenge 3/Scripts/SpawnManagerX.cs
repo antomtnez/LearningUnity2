@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SpawnManagerX : MonoBehaviour
 {
@@ -13,7 +11,7 @@ public class SpawnManagerX : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("PrawnsObject", spawnDelay, spawnInterval);
+        InvokeRepeating("SpawnObjects", spawnDelay, spawnInterval);
         playerControllerScript = GameObject.Find("Player").GetComponent<PlayerControllerX>();
     }
 
@@ -26,9 +24,6 @@ public class SpawnManagerX : MonoBehaviour
 
         // If game is still active, spawn new object
         if (!playerControllerScript.gameOver)
-        {
             Instantiate(objectPrefabs[index], spawnLocation, objectPrefabs[index].transform.rotation);
-        }
-
     }
 }
